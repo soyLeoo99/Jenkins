@@ -1,15 +1,28 @@
 #! bin/bash
 
-echo "Activando entorno virtual"
-if[!"-d venv" ]; then
+echo "Iniciando Pruebas en Jenkins..."
+
+# Verificar si el entono virtual existe
+if [!"-d venv" ]; then
     pytohn 3 -m venv venv
 fi
-source venv/bin/activate
 
+# Activar el entorno virtual correctamente
+if [ -f "venv/bin/activate" ]; then
+    source venv/bin/activate
+elif [ -f "venv/Scripts/activate" ]; then # Para Windows 
+    source venv/Scripts/activate
+else 
+    echo "Error: No se pudo activar el entorno virtual..."
+    exit 1
+fi
+
+# Verificar si "pip" está instalado correctamente
 echo "Instalando dependencias"
 pip install --upgrade pip
 pip install -r requirements.txt
 
+# Ejecutar las pruebas y generar reportes
 echo "Pruebas con pytest"
 pytest tests/ --junitxml=reports/test-results.xml --html=reports/test-results.html
 
