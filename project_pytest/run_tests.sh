@@ -5,7 +5,7 @@ echo "Iniciando Pruebas en Jenkins..."
 # Verificar si el entono virtual existe
 if [ ! -d "venv" ]; then
     echo "Entorno virtual no encontrado, Creándolo..." 
-    apt install python3.11-venv
+    python3 -m venv venv
 fi
 
 # Activar el entorno virtual correctamente
