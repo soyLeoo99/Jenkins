@@ -3,8 +3,9 @@
 echo "Iniciando Pruebas en Jenkins..."
 
 # Verificar si el entono virtual existe
-if [!"-d venv" ]; then
-    python 3 -m venv venv
+if [ ! -d "venv" ]; then
+    echo "Entorno virtual no encontrado, Creándolo..." 
+    python3 -m venv venv
 fi
 
 # Activar el entorno virtual correctamente
@@ -24,6 +25,6 @@ pip install -r requirements.txt --break-system-packages
 
 # Ejecutar las pruebas y generar reportes
 echo " 🛠️ Pruebas con pytest"
-venv/bin/python -m pytest --junitxml=reports/junit.xml --html=reports/report.html --self-contained-html
+venv/bin/python -m pytest tests/ --junitxml=reports/junit.xml --html=reports/report.html --self-contained-html
 
 echo "Pruebas Finalizadas, reultados en reports"
