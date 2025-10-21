@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    stages {
+        stage('build'){
+            steps{
+                sh 'mvn clean install'
+            }
+        }
+        stage('test'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+        stage('deploy'){
+            steps{
+                echo 'Simulando un despliegue a un servidor de aplicaciones'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Siempre se va a ejecutar'
+        }
+        succes {
+            echo 'Este bloque se ejecuta si el pipeline se ejecuta correctamente'
+        }
+        failure {
+            echo 'Este bloque se ejecuta si el pipeline falla'
+        }
+    }
+}
