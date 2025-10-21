@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('build'){
             steps{
-                sh 'mvn clean install'
+                sh 'cd proyecto-Java && mvn clean install'
             }
         }
         stage('test'){
             steps{
-                sh 'mvn test'
+                sh 'cd proyecto-Java && mvn test'
             }
         }
         stage('deploy'){
